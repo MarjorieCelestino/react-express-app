@@ -127,6 +127,8 @@ body {
   border-color: #1CA347;
 }
 
-.blank-space{
-  margin-bottom: 100px;
+.btn-log{
+  margin-right: 50px;
+  font-size: 16px;
+  color: #53A3CD;
 }
