@@ -25,7 +25,7 @@ class App extends Component {
 								<div class="col-lg-12">
 									<form id="login-form" method="post" role="form">
 										<div class="form-group">
-											<input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Name" value=""/>
+											<input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail" value=""/>
 										</div>
 										<div class="form-group">
 											<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"/>
