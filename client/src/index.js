@@ -12,8 +12,8 @@ const Root = () => {
     <div className="container">
       <Router history={browserHistory}>
         <Route path="/" component={App}/>
-        <Route path="/home" component={HomePage}/>
-        <Route path="/register" component={Register}/>
+        <Route path="/HomePage" component={HomePage}/>
+        <Route path="/Register" component={Register}/>
       </Router>
     </div>
   )

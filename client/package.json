@@ -4,17 +4,24 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "moment": "^2.22.0",
     "react": "^16.3.0",
+    "react-alert": "^3.4.0",
     "react-dom": "^16.3.0",
+    "react-google-autocomplete": "^1.0.15",
+    "react-intl-tel-input": "^5.0.2",
     "react-router": "^3.2.1",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-select": "^1.2.1",
+    "react-transition-group": "^2.3.0",
+    "react-validation": "^3.0.7"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": "http://179.182.227.89:80/"
 }

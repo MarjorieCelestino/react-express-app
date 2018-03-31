@@ -2,7 +2,49 @@ import React, { Component } from 'react';
 import './App.css';
 import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
+
 class App extends Component {
+
+	constructor(props) {
+        super(props)
+        this.state = {
+            email: '',
+            password: '',
+            loading: false,
+            error: false
+        }
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleSubmit(event) {
+        event.preventDefault()
+        var data = {
+            email: this.state.email,
+            password: this.state.password,
+        }
+        console.log(data)
+        fetch("https://userrecord.azurewebsites.net/HomePage", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(function(response) {
+            if (response.status >= 400) {
+              throw new Error("Error");
+            }
+            return response.json();
+        }).then(function(data) {
+            console.log(data)    
+            if(data == "success"){
+               this.refs.msg.show('Some text or component', {
+                  time: 2000,
+                  type: 'success',
+                })
+            }
+        }).catch(function(err) {
+            console.log(err)
+        });
+    }
+
   render() {
     return (
     <div className="Login">
@@ -26,10 +68,10 @@ class App extends Component {
 								<div class="col-lg-12">
 									<form id="login-form" method="post" role="form">
 										<div class="form-group">
-											<input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail" value=""/>
+											<input type="email" required name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail"/>
 										</div>
 										<div class="form-group">
-											<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"/>
+											<input type="password" required name="password" id="password" tabindex="2" class="form-control" placeholder="Password"/>
 										</div>
 										<div class="form-group">
 											<div class="row">
@@ -43,14 +85,14 @@ class App extends Component {
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Sign in"/>
+													<input href="/HomePage" type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Sign in"/>
 												</div>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<a href="/register" class="btn form-control btn-register">Create Account</a>
+													<a href="/Register" class="btn form-control btn-register">Create Account</a>
 												</div>
 											</div>
 										</div>
