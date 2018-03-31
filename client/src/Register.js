@@ -12,7 +12,7 @@ class Register extends Component {
       </head>
       	<nav class="navbar navbar-default navbar-fixed-top blank-space">
     		<ul class="nav navbar-nav navbar-right">
-      			<li class="btn-log"><a href="#contact">Sign in</a></li>
+      			<li class="btn-log active"><a href="#contact">Sign in</a></li>
     		</ul>
 		</nav>
 	    <div class="container">
@@ -20,7 +20,7 @@ class Register extends Component {
 				<div class="col-md-6 col-md-offset-3">
 					<div class="panel panel-login">
 						<div class="panel-heading">
-							<a class="active">Create Account</a>
+							<a class="active">Registered Users</a>
 						<hr/>
 						</div>
 						<div class="panel-body">
