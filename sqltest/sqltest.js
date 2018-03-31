@@ -4,12 +4,12 @@ var Request = require('tedious').Request;
 // Create connection to database
 var config = 
    {
-     userName: 'marjorie', 
-     password: 'Pial59121314.',
-     server: 'server-assignment.database.windows.net', 
+     userName: 'marjorie@my-demo-sv', 
+     password: '',
+     server: 'my-demo-sv.mysql.database.azure.com', 
      options: 
         {
-           database: 'user-record'
+           database: 'userrecord'
            , encrypt: true
         }
    }
