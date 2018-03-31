@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
 class HomePage extends Component {
   render() {
@@ -15,7 +16,7 @@ class HomePage extends Component {
       			<li class="welcome-user"><a>Hello user</a></li>
     		</ul>
     		<ul class="nav navbar-nav navbar-right">
-      			<li class="btn-log active"><a href="#contact">Sign out</a></li>
+      			<li class="btn-log active"><a href="/">Sign out</a></li>
     		</ul>
 		</nav>
 	    <div class="container">

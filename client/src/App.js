@@ -50,7 +50,7 @@ class App extends Component {
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="go-to-register" id="go-to-register" tabindex="4" className="form-control btn btn-register" value="create account"/>
+													<a href="/register" class="btn form-control btn-register">Create Account</a>
 												</div>
 											</div>
 										</div>

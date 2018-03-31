@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
 class Register extends Component {
   render() {
@@ -12,7 +13,7 @@ class Register extends Component {
       </head>
       	<nav class="navbar navbar-default navbar-fixed-top blank-space">
     		<ul class="nav navbar-nav navbar-right">
-      			<li class="btn-log active"><a href="#contact">Sign in</a></li>
+      			<li class="btn-log active"><a href="/">Sign in</a></li>
     		</ul>
 		</nav>
 	    <div class="container">
