@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
 class App extends Component {
   render() {
@@ -49,7 +50,7 @@ class App extends Component {
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="create account"/>
+													<input type="submit" name="go-to-register" id="go-to-register" tabindex="4" className="form-control btn btn-register" value="create account"/>
 												</div>
 											</div>
 										</div>
