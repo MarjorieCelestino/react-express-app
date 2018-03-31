@@ -6,5 +6,5 @@ import Register from './Register';
 import HomePage from './HomePage';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<HomePage />, document.getElementById('root'));
+ReactDOM.render(<Register />, document.getElementById('root'));
 registerServiceWorker();

@@ -20,7 +20,7 @@ class Register extends Component {
 				<div class="col-md-6 col-md-offset-3">
 					<div class="panel panel-login">
 						<div class="panel-heading">
-							<a class="active">Registered Users</a>
+							<a class="active">Create Account</a>
 						<hr/>
 						</div>
 						<div class="panel-body">
