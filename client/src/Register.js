@@ -14,6 +14,7 @@ class Register extends Component {
 	constructor(props) {
         super(props)
         this.state = {
+        	value: '',
             name: '',
             email: '',
             password: '',
@@ -22,7 +23,19 @@ class Register extends Component {
             loading: false,
             error: false
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.currentDate = this.currentDate.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleChange(event){
+        this.currentDate();
+    }
+
+    currentDate(){
+        var today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        this.setState({value: date});
     }
 
     handleSubmit(event) {
@@ -32,10 +45,10 @@ class Register extends Component {
             email: this.state.email,
             password: this.state.password,
             passwordConfirm: this.state.passwordConfirm,
-            data: this.state.data
+            date: this.state.dateAdded
         }
         console.log(data)
-        fetch("https://userrecord.azurewebsites.net/Register", {
+        fetch("https://userrecord.azurewebsites.net/HomePage", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -65,7 +78,10 @@ class Register extends Component {
       <head>
       	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script>
+			function 
+			}
+		</script>
       </head>
       	<nav class="navbar navbar-default navbar-fixed-top blank-space">
     		<ul class="nav navbar-nav navbar-right">
@@ -83,7 +99,7 @@ class Register extends Component {
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<form id="register-form">
+									<form id="register-form" onChange={this.handleChange}>
 										<div class="form-group">
 											<input type="text" required name="name" id="name" tabindex="1" class="form-control" placeholder="Name"/>
 										</div>
@@ -94,10 +110,10 @@ class Register extends Component {
 											<input type="password"required name="password" id="password" tabindex="2" class="form-control" placeholder="Password" pattern=".{6,0}"/>
 										</div>
 										<div class="form-group">
-											<input type="password" required name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" pattern=".{6,}"/>
+											<input type="password" required name="passwordConfirm" id="passwordConfirm" tabindex="2" class="form-control" placeholder="Confirm Password" pattern=".{6,}"/>
 										</div>
 										<div class="form-group">
-											<input type="hidden" name="date" id="date-added" class="form-control"/>
+											<input type="text" value={this.state.value}  name="dateAdded" id="dateAdded" class="form-control" style={{display: 'none'}}/>
 										</div>
 										<div class="form-group">
 											<div class="row">
