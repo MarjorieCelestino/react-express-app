@@ -73,7 +73,7 @@ class Register extends Component {
             date: this.state.dateAdded
         }
         console.log(data)
-        fetch("https://userrecord.azurewebsites.net/HomePage", {
+        fetch("https://userrecord.azurewebsites.net/Register", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -103,10 +103,6 @@ class Register extends Component {
       <head>
       	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-		<script>
-			function 
-			}
-		</script>
       </head>
       	<nav class="navbar navbar-default navbar-fixed-top blank-space">
     		<ul class="nav navbar-nav navbar-right">

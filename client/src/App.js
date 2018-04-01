@@ -3,6 +3,7 @@ import './App.css';
 import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
 
+
 class App extends Component {
 
 	constructor(props) {
@@ -23,7 +24,7 @@ class App extends Component {
             password: this.state.password,
         }
         console.log(data)
-        fetch("https://userrecord.azurewebsites.net/HomePage", {
+        fetch("https://userrecord.azurewebsites.net/App", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -51,7 +52,6 @@ class App extends Component {
       <head>
       	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       </head>
       	<nav class="navbar navbar-default navbar-fixed-top blank-space">
 		</nav>
@@ -77,7 +77,7 @@ class App extends Component {
 											<div class="row">
 												<div class="col-lg-12">
 													<div class="text-center">
-														<a tabindex="5" class="forgot-password">Forgot Password?</a>
+														<a class="btn" href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
 													</div>
 												</div>
 											</div>
@@ -85,7 +85,7 @@ class App extends Component {
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input href="/HomePage" type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Sign in"/>
+													<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Sign in"/>
 												</div>
 											</div>
 										</div>
