@@ -8,7 +8,6 @@ var express    = require('express'),
 var connection = mysql.createConnection({
         host     : 'my-demo-sv.mysql.database.azure.com',
         user     : 'marjorie@my-demo-sv',
-        password : 'password'
     });
     
 var app = module.exports = express.createServer();

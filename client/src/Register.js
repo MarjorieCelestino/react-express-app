@@ -73,7 +73,7 @@ class Register extends Component {
             date: this.state.dateAdded
         }
         console.log(data)
-        fetch("https://userrecord.azurewebsites.net/Register", {
+        fetch("https://userrecord.azurewebsites.net/HomePage", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -120,7 +120,7 @@ class Register extends Component {
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<form id="register-form" onChange={this.handleChange}>
+									<form id="register-form" onChange={this.handleChange} >
 										<div class="form-group">
 											<input type="text" required name="name" id="name" tabindex="1" class="form-control" placeholder="Name"/>
 										</div>

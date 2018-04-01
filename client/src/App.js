@@ -17,6 +17,7 @@ class App extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+
     handleSubmit(event) {
         event.preventDefault()
         var data = {
@@ -44,6 +45,8 @@ class App extends Component {
         }).catch(function(err) {
             console.log(err)
         });
+
+        this.setState({ fireRedirect: true })
     }
 
   render() {
