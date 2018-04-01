@@ -26,6 +26,8 @@ class Register extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.currentDate = this.currentDate.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.checkPwdSize = this.checkPwdSize.bind(this)
+        this.checkPwdConfirm = this.checkPwdConfirm.bind(this)
     }
 
     handleChange(event){
@@ -36,6 +38,29 @@ class Register extends Component {
         var today = new Date(),
         date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.setState({value: date});
+    }
+
+    checkPwdSize(event){
+        var pwd = document.getElementById('password');
+        var alert = document.getElementById('alertPwdSize');
+
+        if(pwd.value.length < 6){
+            alert.style.display = "block";
+        }else{
+            alert.style.display = "none";
+        }
+    }
+
+    checkPwdConfirm(event){
+        var pwd = document.getElementById('password');
+        var pwdConfirm = document.getElementById('passwordConfirm');
+        var alertConfirm = document.getElementById('alertWrongPwd');
+
+        if(pwd.value === pwdConfirm.value){
+            alertConfirm.style.display = "none";
+        }else{
+            alertConfirm.style.display = "block";
+        }
     }
 
     handleSubmit(event) {
@@ -106,12 +131,20 @@ class Register extends Component {
 										<div class="form-group">
 											<input type="email" required name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address"/>
 										</div>
-										<div class="form-group">
+										<div class="form-group" onBlur={this.checkPwdSize}>
 											<input type="password"required name="password" id="password" tabindex="2" class="form-control" placeholder="Password" pattern=".{6,0}"/>
 										</div>
-										<div class="form-group">
+                                        <div id="alertPwdSize" class="alert alert-info " role="alert" style={{display: 'none'}}>
+                                          <span class="glyphicon glyphicon-exclamation-sign alertIcon" aria-hidden="true"></span>
+                                          Password should have at least 6 characters
+                                        </div>
+										<div class="form-group" onBlur={this.checkPwdConfirm}>
 											<input type="password" required name="passwordConfirm" id="passwordConfirm" tabindex="2" class="form-control" placeholder="Confirm Password" pattern=".{6,}"/>
 										</div>
+                                        <div id="alertWrongPwd" class="alert alert-warning " role="alert" style={{display: 'none'}}>
+                                          <span class="glyphicon glyphicon-exclamation-sign alertIcon" aria-hidden="true"></span>
+                                          Password does not match the confirm password
+                                        </div>
 										<div class="form-group">
 											<input type="text" value={this.state.value}  name="dateAdded" id="dateAdded" class="form-control" style={{display: 'none'}}/>
 										</div>
