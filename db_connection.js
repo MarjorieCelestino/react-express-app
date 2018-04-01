@@ -28,8 +28,8 @@ conn.connect(
     }
     else
     {	
-    	// Begin listening
-app.listen(port);
+       // Begin listening
+	   app.listen(port);
        queryDatabase();
        console.log("Connection established.");
     }   
