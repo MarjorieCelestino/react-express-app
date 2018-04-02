@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt');
 
-// sequelize instance with database information.
+// sequelize instance with database information
 const sequelize = new Sequelize('userrecord', 'marjorie@my-demo-sv', '', {
   host: 'my-demo-sv.mysql.database.azure.com',
   dialect: 'mysql',

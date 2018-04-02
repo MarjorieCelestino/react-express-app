@@ -105,7 +105,7 @@ class Signup extends Component {
       </head>
       	<nav class="navbar navbar-default navbar-fixed-top blank-space">
     		<ul class="nav navbar-nav navbar-right">
-      		<li class="btn-log active"><a href="/login">Sign in</a></li>
+      		<li class="btn-log active"><a href="/dashboard">Sign in</a></li>
     		</ul>
 		</nav>
 	    <div class="container">
@@ -163,4 +163,4 @@ class Signup extends Component {
   }
 }
 
-export default Register;
+export default Signup;
