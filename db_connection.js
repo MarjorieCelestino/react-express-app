@@ -6,7 +6,7 @@ var config =
 {
     host: 'my-demo-sv.mysql.database.azure.com',
     user: 'marjorie@my-demo-sv',
-    password: 'Pial5912.',
+    password: '',
     database: 'userrecord',
     port: 3306,
     ssl: true
@@ -34,9 +34,6 @@ conn.connect(
        console.log("Connection established.");
     }   
 });
-
-
-
 
 //Database setup
 function queryDatabase(){
