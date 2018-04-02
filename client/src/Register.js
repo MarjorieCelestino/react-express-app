@@ -69,11 +69,10 @@ class Register extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            passwordConfirm: this.state.passwordConfirm,
-            date: this.state.dateAdded
+            added: this.state.added
         }
         console.log(data)
-        fetch("https://userrecord.azurewebsites.net/HomePage", {
+        fetch("/users/new", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -120,7 +119,7 @@ class Register extends Component {
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<form id="register-form" onChange={this.handleChange} >
+									<form id="register-form" onChange={this.handleChange} onSubmit={this.handleSubmit} method="POST">
 										<div class="form-group">
 											<input type="text" required name="name" id="name" tabindex="1" class="form-control" placeholder="Name"/>
 										</div>
@@ -142,7 +141,7 @@ class Register extends Component {
                                           Password does not match the confirm password
                                         </div>
 										<div class="form-group">
-											<input type="text" value={this.state.value}  name="dateAdded" id="dateAdded" class="form-control" style={{display: 'none'}}/>
+											<input type="text" value={this.state.value}  name="added" id="added" class="form-control" style={{display: 'none'}}/>
 										</div>
 										<div class="form-group">
 											<div class="row">

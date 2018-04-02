@@ -4,6 +4,29 @@ import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
 class HomePage extends Component {
 	
+	constructor(props) {
+        super(props)
+        this.state = {
+            users: []
+        }
+    }
+
+    componentDidMount() {
+        let self = this;
+        fetch('/users', {
+            method: 'GET'
+        }).then(function(response) {
+            if (response.status >= 400) {
+                throw new Error("Server response error");
+            }
+            return response.json();
+        }).then(function(data) {
+            self.setState({users: data});
+        }).catch(err => {
+        console.log('ERROR',err);
+        })
+    }
+
   render() {
     return (
     <div className="HomePage">
@@ -36,16 +59,13 @@ class HomePage extends Component {
     								</tr>
   								</thead>
   								<tbody>
-								    <tr>
-								      <td>Mark</td>
-								      <td>mark@gmail.com</td>
-								      <td>14/10/18</td>
-								    </tr>
-								    <tr>
-								      <td>Jacob</td>
-								      <td>Thornton@gmail.com</td>
-								      <td>14/10/18</td>
-								    </tr>
+								    {this.state.users.map(users =>
+				                        <tr key={users.id}>
+				                        <td>{users.name} </td>
+				                        <td>{users.email}</td>
+				                        <td>{users.added}</td>
+				                        </tr>
+				                    )}
     							</tbody>
     						</table>
 					</div>

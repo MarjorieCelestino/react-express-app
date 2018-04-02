@@ -1,5 +1,7 @@
 const mysql = require('mysql2');
 const express = require('express');
+const http = require('http').Server(app);
+const bodyParser = require("body-parser");
 
 //Database connection
 var config =
@@ -12,6 +14,9 @@ var config =
     ssl: true
 };
 
+app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.json()); // Body parser use JSON data
+
 const conn = new mysql.createConnection(config);
 const app = express();
 const port = process.env.PORT || 3306;
@@ -23,13 +28,14 @@ res.sendfile(__dirname + '/App.js');
 conn.connect(
     function (err) { 
     if (err) { 
-        console.log("!!! Cannot connect !!! Error:");
+        console.log("Cannot connect! Error:");
         throw err;
     }
     else
     {	
-       // Begin listening
+       //begin listening
 	   app.listen(port);
+	   //setup db
        queryDatabase();
        console.log("Connection established.");
     }   
@@ -41,8 +47,7 @@ function queryDatabase(){
             if (err) throw err; 
             console.log('Database created.');
         })
-       conn.query('CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, email NVARCHAR(50) NOT NULL, password CHAR(128) NOT NULL, added DATE NOT NULL);', 
-            function (err, results, fields) {
+       conn.query('CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(50) NOT NULL, email NVARCHAR(50) NOT NULL, password CHAR(128) NOT NULL, added DATE NOT NULL);', function (err, results, fields) {
                 if (err) throw err;
             console.log('Created inventory table.');
         })
@@ -52,63 +57,38 @@ function queryDatabase(){
         });
 };
 
-// Update MySQL database
 function insertData(){
-	app.post('/users', function (req, res) {
-    conn.query('INSERT INTO users SET ?', req.body, 
-        function (err, results, fields) {
-            if (err) throw err;
-            res.send('User added to database with ID: ' + result.insertId);
-            console.log('Inserted ' + results.affectedRows + ' row(s).');
-        }
-    );
-	});
-
-       conn.end(function (err) { 
-        if (err) throw err;
-        else  console.log('Done.') 
-        });
-};
+	router.post('/new', function(req, res, next) {
+		var post  = {name: req.body.name};
+   		 res.locals.connection.query('INSERT INTO users(name,email) values(req.body.name, req.body.email, req.body.password, req.body.added)', function (error, results, fields) {
+        if(error) throw error;
+        res.send(JSON.stringify(results));
+    });
+});
 
 function readData(){
-        conn.query('SELECT * FROM users', 
-            function (err, results, fields) {
-                if (err) throw err;
-                else console.log('Selected ' + results.length + ' row(s).');
-                for (i = 0; i < results.length; i++) {
-                    console.log('Row: ' + JSON.stringify(results[i]));
-                }
-                console.log('Done.');
-            })
-       conn.end(
-           function (err) { 
-                if (err) throw err;
-                else  console.log('Closing connection.') 
-        });
+    app.get('/users', function(req, res, next) {
+    	res.locals.conn.query('SELECT * FROM users', function (error, results, fields) {
+        if(error) throw error;
+        res.send(JSON.stringify(results));
+    	});
+	});
 };
 
 function updateData(){
-       conn.query('UPDATE users SET # = ? WHERE # = ?', ['', ''], 
-            function (err, results, fields) {
-                if (err) throw err;
-                else console.log('Updated ' + results.affectedRows + ' row(s).');
-        })
-       conn.end(
-           function (err) { 
-                if (err) throw err;
-                else  console.log('Done.') 
-        });
+       router.get('/edit', function(req, res, next) {
+	    	res.locals.conn.query('UPDATE users SET name = req.body.name+'', email = ''+req.body.email+'' WHERE id = ''+req.body.id+''', function (error, results, fields) {
+	        if(error) throw error;
+	        res.send(JSON.stringify(results));
+	    	});
+		});
 };
 
 function deleteData(){
-       conn.query('DELETE FROM users WHERE # = ?', [''], 
-            function (err, results, fields) {
-                if (err) throw err;
-                else console.log('Deleted ' + results.affectedRows + ' row(s).');
-        })
-       conn.end(
-           function (err) { 
-                if (err) throw err;
-                else  console.log('Done.') 
-        });
+       router.get('/delete', function(req, res, next) {
+	    	res.locals.conn.query('DELETE FROM users WHERE id = '+req.body.id+'', function (error, results, fields) {
+	        if(error) throw error;
+	        res.send(JSON.stringify(results));
+    		});
+		});
 };
