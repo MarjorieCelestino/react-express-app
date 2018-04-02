@@ -4,7 +4,7 @@ import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
 
 
-class App extends Component {
+class Login extends Component {
 
 	constructor(props) {
         super(props)
@@ -95,7 +95,7 @@ class App extends Component {
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<a href="/Register" class="btn form-control btn-register">Create Account</a>
+													<a href="/signup" class="btn form-control btn-register">Create Account</a>
 												</div>
 											</div>
 										</div>

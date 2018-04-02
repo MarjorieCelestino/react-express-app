@@ -9,7 +9,7 @@ import moment from 'moment';
 import AlertContainer from 'react-alert'
 
 
-class Register extends Component {
+class Signup extends Component {
 
 	constructor(props) {
         super(props)
@@ -98,14 +98,14 @@ class Register extends Component {
 
   render() {
     return (
-    <div className="Register">
+    <div className="Signup">
       <head>
       	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
       </head>
       	<nav class="navbar navbar-default navbar-fixed-top blank-space">
     		<ul class="nav navbar-nav navbar-right">
-      		<li class="btn-log active"><a href="/HomePage">Sign in</a></li>
+      		<li class="btn-log active"><a href="/login">Sign in</a></li>
     		</ul>
 		</nav>
 	    <div class="container">
@@ -119,7 +119,7 @@ class Register extends Component {
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<form id="register-form" onChange={this.handleChange} onSubmit={this.handleSubmit} method="POST">
+									<form id="register-form" onChange={this.handleChange} action="/signup" method="post">
 										<div class="form-group">
 											<input type="text" required name="name" id="name" tabindex="1" class="form-control" placeholder="Name"/>
 										</div>
