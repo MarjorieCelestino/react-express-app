@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt');
 
-// create a sequelize instance with our local postgres database information.
+// sequelize instance with database information.
 const sequelize = new Sequelize('userrecord', 'marjorie@my-demo-sv', '', {
   host: 'my-demo-sv.mysql.database.azure.com',
   dialect: 'mysql',
@@ -15,7 +15,7 @@ const sequelize = new Sequelize('userrecord', 'marjorie@my-demo-sv', '', {
   },
 });
 
-// setup User model and its fields.
+//setup user model and its fields.
 var User = sequelize.define('users', {
     name: {
         type: Sequelize.STRING,
@@ -49,10 +49,10 @@ var User = sequelize.define('users', {
     }    
 });
 
-// create all the defined tables in the specified database.
+//create all the defined tables in the specified database.
 sequelize.sync()
     .then(() => console.log('users table has been successfully created, if one doesn\'t exist'))
     .catch(error => console.log('This error occured', error));
 
-// export User model for use in other files.
+//export user model for use in other files.
 module.exports = User;
