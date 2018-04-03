@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "userrecord",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "marjorie@my-demo-sv",
+    "password": "",
+    "database": "userrecord",
+    "host": "my-demo-sv.mysql.database.azure.com",
+    "dialect": "mysql"
+  }
+}

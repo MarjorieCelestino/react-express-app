@@ -8,12 +8,12 @@ module.exports = (grunt) => {
   grunt.initConfig({
     execute: {
       target: {
-        src: ['App.js']
+        src: ['server.js']
       }
     },
     watch: {
       scripts: {
-        files: ['App.js'],
+        files: ['server.js'],
         tasks: ['execute'],
       },
     }
