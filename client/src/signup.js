@@ -83,7 +83,7 @@ class Signup extends Component {
             return response.json();
         }).then(function(data) {
             console.log(data)    
-            if(data == "success"){
+            if(data === "success"){
                this.refs.msg.show('Some text or component', {
                   time: 2000,
                   type: 'success',
