@@ -3,7 +3,6 @@
 * grunt-contrib-watch runs a pre-defined task whenever a watched file changes 
 * grunt-execute can be used to run the node app.js command
 */
-
 module.exports = (grunt) => {
   grunt.initConfig({
     execute: {
