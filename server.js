@@ -1,70 +1,96 @@
+var createError = require('http-errors');
 var express = require('express');
-var bodyParser = require('body-parser');
+var path = require('path');
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var morgan = require('morgan');
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var http = require('http');
 var db = require('./models');
 
-//instance of express application.
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
 var app = express();
 
-//set our application port
-app.set('port', 80);
+// trust first proxy
+app.set('trust proxy', 1) 
 
-//set morgan to log info about our requests for development use.
-app.use(morgan('dev'));
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-//initialize body-parser to parse incoming parameters requests to req.body
-app.use(bodyParser.urlencoded({ extended: true }));
-
-//initialize cookie-parser to allow access the cookies stored in the browser. 
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-//initialize express-session to allow track the logged-in user across sessions.
-app.use(session({
-    key: 'user_sid',
-    secret: 'somerandonstuffs',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 600000
-    }
-}));
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
-
-// check if user's cookie is still saved in browser and user is not set, then automatically log the user out
-app.use((req, res, next) => {
-    if (req.cookies.user_sid && !req.session.user) {
-        res.clearCookie('user_sid');        
-    }
-    next();
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
-
-//middleware function to check for logged-in users
-var sessionChecker = (req, res, next) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.redirect('/dashboard');
-    } else {
-        next();
-    }    
-};
-
-
-//route for home page
-app.get('/', sessionChecker, (req, res) => {
-    res.redirect('/login');
+app.get('/dashboard', function(req, res) {
+  User.findAll()
+    .then(function (users) {
+      res.json(users);
+    });
 });
 
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//route for handling 404 requests(unavailable routes)
-app.use(function (req, res, next) {
-  res.status(404).send("Sorry can't find that!")
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
+module.exports = app;
 
 //start the express server and connect to db
-app.listen(app.get('port'), function() {
+var server = http.createServer(app);
+server.listen(4000, function() {
   db.sequelize.sync();
 });
+
+server.on('listening', () => {
+  console.log('Server is listening on port: 4000');
+});
+
+server.on('error', onError);
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
 
