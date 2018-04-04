@@ -25,10 +25,12 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3000/",
   "devDependencies": {
     "grunt": "^1.0.2",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-execute": "^0.2.2"
-  }
+    "grunt-execute": "^0.2.2",
+    "concurrently": "^3.5.0"
+  },
+
+  "proxy": "http://localhost:3000/"
 }

@@ -11,7 +11,7 @@ class Dashboard extends Component {
         }
     }
 
-    componentDidMount() {
+  componentDidMount() {
         let self = this;
         fetch('/users', {
             method: 'GET'
@@ -61,9 +61,9 @@ class Dashboard extends Component {
   								<tbody>
 								    {this.state.users.map(users =>
 				              <tr key={users.id}>
-                        <td>{users.name} </td>
+                        <td>{users.name}</td>
                         <td>{users.email}</td>
-                        <td>{users.added}</td>
+                        <td>{users.date_added}</td>
                       </tr>
 				            )}
     							</tbody>

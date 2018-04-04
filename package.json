@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
     "cookie-parser": "^1.4.3",
     "debug": "~2.6.9",
     "express": "^4.16.3",
@@ -23,6 +26,7 @@
   "devDependencies": {
     "grunt": "^1.0.2",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-execute": "^0.2.2"
+    "grunt-execute": "^0.2.2",
+    "concurrently": "^3.5.1"
   }
 }

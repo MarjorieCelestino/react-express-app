@@ -19,7 +19,7 @@ class Signup extends Component {
             email: '',
             password: '',
             passwordConfirm: '',
-            date: '',
+            date_added: '',
             loading: false,
             error: false
         }
@@ -69,7 +69,7 @@ class Signup extends Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
-            added: this.state.added
+            date_added: this.state.date_added
         }
         console.log(data)
         fetch("/users/new", {
@@ -127,7 +127,7 @@ class Signup extends Component {
 											<input type="email" required name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address"/>
 										</div>
 										<div class="form-group" onBlur={this.checkPwdSize}>
-											<input type="password"required name="password" id="password" tabindex="2" class="form-control" placeholder="Password" pattern=".{6,0}"/>
+											<input type="password" required name="password" id="password" tabindex="2" class="form-control" placeholder="Password" pattern=".{6,0}"/>
 										</div>
                                         <div id="alertPwdSize" class="alert alert-info " role="alert" style={{display: 'none'}}>
                                           <span class="glyphicon glyphicon-exclamation-sign alertIcon" aria-hidden="true"></span>
@@ -141,7 +141,7 @@ class Signup extends Component {
                                           Password does not match the confirm password
                                         </div>
 										<div class="form-group">
-											<input type="text" value={this.state.value}  name="added" id="added" class="form-control" style={{display: 'none'}}/>
+											<input type="text" value={this.state.value}  name="date_added" id="date_added" class="form-control" style={{display: 'none'}}/>
 										</div>
 										<div class="form-group">
 											<div class="row">
