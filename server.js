@@ -3,25 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require('body-parser');
-var http = require('http');
 var db = require('./models');
+var http = require('http');
+
+var port = normalizePort(process.env.PORT || '3001');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-// trust first proxy
-app.set('trust proxy', 1) 
+// Express only serves static assets in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.set('port', port);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'client/src'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -31,13 +36,6 @@ app.use('/users', usersRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
-});
-
-app.get('/dashboard', function(req, res) {
-  User.findAll()
-    .then(function (users) {
-      res.json(users);
-    });
 });
 
 // error handler
@@ -53,17 +51,34 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-//start the express server and connect to db
 var server = http.createServer(app);
-server.listen(4000, function() {
-  db.sequelize.sync();
+
+//Listen on provided port, on all network interfaces.
+db.sequelize.sync().then(function() {
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
 });
 
-server.on('listening', () => {
-  console.log('Server is listening on port: 4000');
-});
+/**
+ * Normalize a port into a number, string, or false.
+ */
 
-server.on('error', onError);
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
 
 /**
  * Event listener for HTTP server "error" event.
@@ -92,5 +107,18 @@ function onError(error) {
       throw error;
   }
 }
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  console.log('Listening on ' + bind);
+}
+
 
 

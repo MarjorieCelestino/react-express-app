@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Router, Route, Link, RouteHandler} from 'react-router-dom';
 
 class Dashboard extends Component {
 	
 	constructor(props) {
         super(props)
         this.state = {
-            users: []
+            users: [],
+            response: ''
         }
     }
 
   componentDidMount() {
-        let self = this;
         fetch('/users', {
             method: 'GET'
         }).then(function(response) {
             if (response.status >= 400) {
-                throw new Error("Server response error");
+                throw new Error("Bad response from server");
             }
+            console.log(response);
             return response.json();
         }).then(function(data) {
-            self.setState({users: data});
+            console.log(data);
+            this.setState({users: data});
         }).catch(err => {
-        console.log('ERROR',err);
+        console.log('Error!',err);
         })
-    }
+  }
 
   render() {
     return (
@@ -59,11 +60,11 @@ class Dashboard extends Component {
     								</tr>
   								</thead>
   								<tbody>
-								    {this.state.users.map(users =>
-				              <tr key={users.id}>
-                        <td>{users.name}</td>
-                        <td>{users.email}</td>
-                        <td>{users.date_added}</td>
+								    {this.state.users.map(user =>
+				              <tr key={user.id}>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>{user.date_added}</td>
                       </tr>
 				            )}
     							</tbody>

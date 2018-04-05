@@ -30,6 +30,9 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+//Models - tables
+db.user = require('../models/user.js')(sequelize, Sequelize);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

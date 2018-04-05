@@ -4,7 +4,6 @@ import './index.css';
 import signup from './signup';
 import login from './login';
 import dashboard from './dashboard';
-import registerServiceWorker from './registerServiceWorker';
 import { Router, Route, browserHistory } from 'react-router';
 
 const Root = () => {
@@ -12,7 +11,6 @@ const Root = () => {
     <div className="container">
       <Router history={browserHistory}>
         <Route path="/" component={login}/>
-        <Route path="/login" component={login}/>
         <Route path="/signup" component={signup}/>
         <Route path="/dashboard" component={dashboard}/>
       </Router>

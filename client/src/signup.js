@@ -14,6 +14,7 @@ class Signup extends Component {
 	constructor(props) {
         super(props)
         this.state = {
+            response: '',
         	value: '',
             name: '',
             email: '',
@@ -72,7 +73,7 @@ class Signup extends Component {
             date_added: this.state.date_added
         }
         console.log(data)
-        fetch("/users/new", {
+        fetch("/users", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)

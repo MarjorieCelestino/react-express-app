@@ -9,6 +9,7 @@ class Login extends Component {
 	constructor(props) {
         super(props)
         this.state = {
+        	response: '',
             email: '',
             password: '',
             loading: false,
@@ -16,6 +17,16 @@ class Login extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    componentDidMount() {
+	    this.callApi()
+	      .then(res => this.setState({ response: res.express }))
+	      .catch(err => console.log(err));
+	}
+	 
+	callApi = async () => {
+	    const response = await fetch('/');
+	};
 
 
     handleSubmit(event) {
